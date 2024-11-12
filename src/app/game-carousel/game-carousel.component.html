@@ -1,0 +1,28 @@
+<div class="carousel">
+  <div class="d-flex justify-content-between">
+    <h5>{{ categoryTitle }} <span>&#x2192;</span></h5>
+    <div class="d-flex gap-2 align-items-center carousel-controls">
+      <button
+        class="carousel-prev"
+        (click)="prevSlide()"
+        [disabled]="currentIndex === 0"
+      >
+        &#x2039;
+      </button>
+      <button
+        class="carousel-next"
+        (click)="nextSlide()"
+        [disabled]="currentIndex === games.length - 1"
+      >
+        &#x203A;
+      </button>
+    </div>
+  </div>
+
+  <div class="d-flex gap-4 game-cards">
+    <div *ngIf="games.length === 0" class="loading-indicator">
+      Loading games...
+    </div>
+    <app-game-card *ngFor="let game of games" [game]="game"></app-game-card>
+  </div>
+</div>

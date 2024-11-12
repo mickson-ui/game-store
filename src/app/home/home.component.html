@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="featured-section">
+    <div class="featured-game">
+      <img
+        src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+        alt="Featured Game"
+        class="featured-image"
+      />
+      <div class="game-info">
+        <h1>Dragon Age: The Veilguard</h1>
+        <p class="availability">AVAILABLE NOW</p>
+        <p class="description">
+          Dragon Age™: The Veilguard has arrived. Unite the Veilguard and defy
+          the gods in an immersive RPG.
+        </p>
+        <p class="price">$59.99</p>
+        <div class="buttons">
+          <button class="buy-button">Buy Now</button>
+          <button class="wishlist-button">+ Add to Wishlist</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <ul class="game-list">
+        <li class="game-item">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Game 1"
+          />
+          <span>Epic Savings</span>
+        </li>
+        <li class="game-item">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Game 2"
+          />
+          <span>TMNT: Splintered Fate</span>
+        </li>
+        <li class="game-item">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Game 3"
+          />
+          <span>Apex Legends™</span>
+        </li>
+        <li class="game-item selected">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Dragon Age: The Veilguard"
+          />
+          <span>Dragon Age™: The Veilguard</span>
+        </li>
+        <li class="game-item">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Game 4"
+          />
+          <span>Zenless Zone Zero</span>
+        </li>
+        <li class="game-item">
+          <img
+            src="https://store-images.s-microsoft.com/image/apps.17225.71371076658790719.f03e633a-c24b-4548-a357-e08218cd4846.f45d21b3-c1aa-44f2-b6cb-d39d41d7f3d4"
+            alt="Game 5"
+          />
+          <span>Planet Coaster 2</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <app-game-carousel categoryTitle="Top Games" [games]="topGames">
+    </app-game-carousel>
+  </div>
+  <div>
+    <app-game-carousel categoryTitle="Trending Now" [games]="trendingGames">
+    </app-game-carousel>
+  </div>
+</div>

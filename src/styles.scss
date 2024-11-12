@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+
+$primary: #101015;
+$secondary: #D90C0D;
+$tertiary-color: #202024;
+$primary-font-color: #FFFFFF;
+$secondary-font-color: #ffffff4d;
+
+body{
+  // font-family: 'Roboto', sans-serif;
+  background-color: $primary;
+  color: $primary-font-color;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+  color: $primary-font-color;
+}
+
+a{
+  color: $secondary;
+  text-decoration: none;
+}
+
+button{
+  background-color: $secondary;
+  color: $primary-font-color;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &hover{
+    background-color: lighten($secondary, 10%);
+  }
+}
+
+

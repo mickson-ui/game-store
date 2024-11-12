@@ -1,0 +1,61 @@
+<div class="container-fluid">
+  <div class="game-details">
+    <div class="game-header">
+      <h1>{{ game.title }}</h1>
+      <div class="game-rating">
+        <span class="rating">{{ game.rating }} ★</span>
+        <div class="tags">
+          <span *ngFor="let tag of game.tags" class="tag">{{ tag }}</span>
+        </div>
+      </div>
+    </div>
+
+    <nav class="game-tabs">
+      <button
+        class="tab"
+        [class.active]="selectedTab === 'overview'"
+        (click)="selectTab('overview')"
+      >
+        Overview
+      </button>
+      <button
+        class="tab"
+        [class.active]="selectedTab === 'achievements'"
+        (click)="selectTab('achievements')"
+      >
+        Achievements
+      </button>
+    </nav>
+
+    <div class="game-media">
+      <img [src]="game.image" alt="{{ game.title }}" />
+      <button
+        *ngIf="game.videoUrl"
+        class="play-video"
+        aria-label="Play trailer"
+        (click)="playTrailer()"
+      >
+        Play Trailer
+      </button>
+    </div>
+    <div class="game-actions">
+      <div class="price-info">
+        <p class="price">{{ game.price }}</p>
+        <p *ngIf="game.discount" class="discount-info">{{ game.discount }}</p>
+      </div>
+      <button class="subscribe-button" (click)="subscribe()">Subscribe</button>
+      <button class="buy-button" (click)="buyNow()">Buy Now</button>
+      <button class="cart-button" (click)="addToCart()">Add to Cart</button>
+      <button class="wishlist-button" (click)="addToWishlist()">
+        Add to Wishlist
+      </button>
+    </div>
+
+    <div class="game-description">
+      <p>{{ game.description }}</p>
+    </div>
+    <div class="game-carousel">
+      <app-game-carousel [games]="relatedGames"></app-game-carousel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,83 @@
+.game-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #fff;
+
+  .game-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .game-rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+  }
+
+  .game-tabs {
+    display: flex;
+    gap: 1rem;
+
+    .tab {
+      background: none;
+      border: none;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      &.active {
+        border-bottom: 2px solid #00bcd4;
+      }
+    }
+  }
+
+  .game-media {
+    position: relative;
+
+    .play-video {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background-color: #00bcd4;
+      color: #fff;
+      border: none;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+  }
+
+  .game-description {
+    p {
+      margin: 0;
+    }
+  }
+
+  .game-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .price-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .subscribe-button,
+    .buy-button,
+    .cart-button,
+    .wishlist-button {
+      background-color: #00bcd4;
+      color: #fff;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+    }
+  }
+}

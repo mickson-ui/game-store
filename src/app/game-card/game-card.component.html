@@ -1,0 +1,16 @@
+<div class="game-card" routerLink="/game/:id">
+  <div class="game-image">
+    <img [src]="game.image" [alt]="game.title" />
+    <button *ngIf="game.playAvailable" class="play-button">Play</button>
+  </div>
+  <div class="game-info">
+    <p class="base-game">{{ game.baseGame }}</p>
+    <h3>{{ game.title }}</h3>
+    <p *ngIf="game.discount" class="discount">
+      <span class="discount-badge">{{ game.discount }}</span>
+      <span class="original-price">{{ game.originalPrice }}</span>
+      <span class="final-price">{{ game.price }}</span>
+    </p>
+    <p *ngIf="!game.discount" class="price">{{ game.price }}</p>
+  </div>
+</div>

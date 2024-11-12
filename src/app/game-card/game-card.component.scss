@@ -1,0 +1,79 @@
+@import "../../styles.scss";
+
+.game-card {
+  width: 14rem;
+  background-color: $primary;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  .game-image {
+    position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .play-button {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1rem;
+      background-color: white;
+      color: $tertiary-color;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .game-info {
+    padding: 0.5rem 1rem;
+
+    .base-game {
+      font-size: 0.9rem;
+      color: $secondary-font-color;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+
+    .price {
+      font-size: 1.1rem;
+    }
+
+    .discount {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .discount-badge {
+        background-color: $secondary;
+        color: white;
+        padding: 0.2rem 0.5rem;
+        border-radius: 5px;
+        font-size: 0.8rem;
+      }
+
+      .original-price {
+        text-decoration: line-through;
+        color: $secondary-font-color;
+      }
+
+      .final-price {
+        font-size: 1.1rem;
+        color: $primary-font-color;
+      }
+    }
+  }
+}
