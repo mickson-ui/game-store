@@ -1,4 +1,5 @@
-export interface Game{
+export interface Game {
+  id: string;
   title: string;
   image: string;
   price: string;

@@ -1,4 +1,4 @@
-<div class="game-card" routerLink="/game/:id">
+<div class="game-card" [routerLink]="['/game', game.id]">
   <div class="game-image">
     <img [src]="game.image" [alt]="game.title" />
     <button *ngIf="game.playAvailable" class="play-button">Play</button>
