@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, Input, OnInit } from '@angular/core';
-import { GameCarouselComponent } from "../game-carousel/game-carousel.component";
 import { Game } from '../shared/models/game.interface';
 import { GameService } from '../shared/services/game.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +9,7 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 @Component({
   selector: 'app-game-details',
   standalone: true,
-  imports: [CommonModule, GameCarouselComponent],
+  imports: [CommonModule],
   templateUrl: './game-details.component.html',
   styleUrl: './game-details.component.scss'
 })
@@ -68,6 +67,16 @@ export class GameDetailsComponent implements OnInit {
   addToWishlist() {
     console.log('Added to wishlist:', this.game.title);
     // Logic for adding to wishlist
+  }
+
+  share(){
+    console.log('Sharing:', this.game.title);
+    // Logic for sharing
+  }
+
+  report(){
+    console.log('Reporting:', this.game.title);
+    // Logic for reporting
   }
 
 }

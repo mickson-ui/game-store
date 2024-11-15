@@ -1,3 +1,5 @@
+// @import "../../styles.scss";
+
 .game-details {
   display: flex;
   flex-direction: column;
@@ -20,7 +22,14 @@
       gap: 0.5rem;
     }
   }
+  .system-requirements{
+    background-color: #202024;
 
+
+  }
+  .text-muted{
+    color: #ffffff4d !important;
+  }
   .game-tabs {
     display: flex;
     gap: 1rem;
@@ -33,32 +42,8 @@
       cursor: pointer;
 
       &.active {
-        border-bottom: 2px solid #00bcd4;
+        border-bottom: 2px solid #D90C0D;
       }
-    }
-  }
-
-  .game-media {
-    position: relative;
-
-    .play-video {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background-color: #00bcd4;
-      color: #fff;
-      border: none;
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-    img{
-      width: 80%;
-    }
-  }
-
-  .game-description {
-    p {
-      margin: 0;
     }
   }
 
@@ -71,16 +56,24 @@
       display: flex;
       flex-direction: column;
     }
+    .title{
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .buy-button{
+      background-color: #D90C0D !important;
+    }
 
     .subscribe-button,
     .buy-button,
     .cart-button,
     .wishlist-button {
-      background-color: #00bcd4;
+      background-color: #202024;
       color: #fff;
       border: none;
-      padding: 1rem;
       cursor: pointer;
+      border-radius: 0.5rem;
     }
   }
 }

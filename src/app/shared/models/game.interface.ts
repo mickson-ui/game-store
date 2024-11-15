@@ -2,6 +2,7 @@ export interface Game {
   id: string;
   title: string;
   image: string;
+  logo: string;
   price: string;
   rating?: number;
   tags?: string[];

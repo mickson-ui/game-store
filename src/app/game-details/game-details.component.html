@@ -18,57 +18,172 @@
       >
         Overview
       </button>
-      <button
+      <!-- <button
         class="tab"
         [class.active]="selectedTab === 'achievements'"
         (click)="selectTab('achievements')"
       >
         Achievements
-      </button>
+      </button> -->
     </nav>
 
     <div class="row">
-      <div class="col-8">
-        <div class="game-media">
-          <video
-            *ngIf="game.videoUrl"
-            controls
-            [src]="game.videoUrl"
-            class="video-player"
-            autoplay
-          >
+      <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
+        <!-- Video or Image Placeholder -->
+        <ng-container *ngIf="game.videoUrl; else imagePlaceholder">
+          <video controls [src]="game.videoUrl" class="video-player w-100" autoplay>
             Your browser does not support the video tag.
           </video>
-          <img
-            *ngIf="!game.videoUrl"
-            [src]="game.image"
-            alt="{{ game.title }}"
-          />
-        </div>
+        </ng-container>
+        <ng-template #imagePlaceholder>
+          <img [src]="game.image" [alt]="game.title" class="img-fluid" />
+        </ng-template>
+        <p class="pt-4 lh-1-base">
+          Step into the vibrant, ever-evolving world of Red Dead Online and
+          experience life across frontier America. Forge your own path as you
+          battle lawmen, outlaw gangs and ferocious wild animals to build a life
+          on the American frontier. Build a camp, ride solo or form a posse and
+          explore everything from the snowy mountains in the North to the swamps
+          of the South, from remote outposts to busy farms and bustling towns.
+          Chase down bounties, hunt, fish and trade, search for exotic
+          treasures, run your own underground Moonshine distillery, or become a
+          Naturalist to learn the secrets of the animal kingdom and much more in
+          a world of astounding depth and detail.
+        </p>
 
-        <div class="game-carousel">
-          <app-game-carousel [games]="relatedGames"></app-game-carousel>
-        </div>
-        <div class="game-description">
-          <p>{{ game.description }}</p>
+        <div class="row">
+          <p class="fs-4 pt-4">{{ game.title }} System Requirements</p>
+          <div class="container p-4 text-light rounded system-requirements">
+            <h3 class="text-primary">Windows</h3>
+            <hr />
+            <div class="row">
+              <!-- Minimum Column -->
+              <div class="col-md-6 mb-4">
+                <h5 class="fw-bold">Minimum</h5>
+                <div class="mb-2">
+                  <small class="text-muted">OS Version</small>
+                  <p class="mb-1">Windows 10</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">CPU</small>
+                  <p class="mb-1">Intel Core i5-4670 / AMD Ryzen 3 120</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">Memory</small>
+                  <p class="mb-1">8 GB</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">GPU</small>
+                  <p class="mb-1">GeForce 1050 / Radeon RX 570</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">Storage</small>
+                  <p class="mb-1">2 GB</p>
+                </div>
+              </div>
+              <!-- Recommended Column -->
+              <div class="col-md-6 mb-4">
+                <h5 class="fw-bold">Recommended</h5>
+                <div class="mb-2">
+                  <small class="text-muted">OS Version</small>
+                  <p class="mb-1">Windows 10</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">CPU</small>
+                  <p class="mb-1">Intel Core i5-10400 / AMD Ryzen 5 5600X</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">Memory</small>
+                  <p class="mb-1">8 GB</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">GPU</small>
+                  <p class="mb-1">GeForce 1050 / Radeon RX 570</p>
+                </div>
+                <div class="mb-2">
+                  <small class="text-muted">Storage</small>
+                  <p class="mb-1">2 GB</p>
+                </div>
+              </div>
+            </div>
+            <!-- Languages Supported -->
+            <div class="mt-4">
+              <small class="text-muted">Languages Supported</small>
+              <p>Audio: N/A</p>
+              <p>
+                Text: English, Chinese (Simplified), French, German, Japanese,
+                Korean, Portuguese (Brazil), Russian, Spanish (Spain), Chinese
+                (Traditional), Hungarian
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-4">
-        <div class="game-actions">
-          <div class="price-info">
-            <p class="price">{{ game.price }}</p>
-            <p *ngIf="game.discount" class="discount-info">
-              {{ game.discount }}
-            </p>
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <!-- Game Actions Section -->
+        <div class="game-actions text-light rounded">
+          <div class="price-info d-flex mb-4">
+            <img
+              [src]="game.logo"
+              alt="game-logo"
+              class="me-3"
+              style="width: 20rem; height: auto"
+            />
+            <div>
+              <p class="price fs-4 pt-4">{{ game.price }}</p>
+              <p *ngIf="game.discount" class="discount-info text-muted">
+                {{ game.discount }}
+              </p>
+            </div>
           </div>
-          <button class="subscribe-button" (click)="subscribe()">
-            Subscribe
+
+          <!-- Action Buttons -->
+          <button class="buy-button w-100" (click)="buyNow()">Buy Now</button>
+          <button class="cart-button w-100" (click)="addToCart()">
+            Add To Cart
           </button>
-          <button class="buy-button" (click)="buyNow()">Buy Now</button>
-          <button class="cart-button" (click)="addToCart()">Add to Cart</button>
-          <button class="wishlist-button" (click)="addToWishlist()">
+          <button class="wishlist-button w-100" (click)="addToWishlist()">
             Add to Wishlist
           </button>
+
+          <!-- Additional Details Section -->
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Game Store Rewards</span>
+            <span
+              >Earn 5% Back <i class="bi bi-star-fill text-danger"></i
+            ></span>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Refund Type</span>
+            <span>Self-Refundable <i class="bi bi-info-circle"></i></span>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Developer</span>
+            <span>Rockstar Games</span>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Publisher</span>
+            <span>Rockstar Games</span>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Release Date</span>
+            <span>12/01/20</span>
+          </div>
+          <div class="mb-3 d-flex justify-content-between">
+            <span class="text-muted">Platform</span>
+            <span><i class="bi bi-windows"></i></span>
+          </div>
+
+          <!-- Share and Report Buttons -->
+          <div class="d-flex justify-content-around mt-3">
+            <button class="btn btn-outline-secondary w-45" (click)="share()">
+              <i class="bi bi-share"></i> Share
+            </button>
+            <button class="btn btn-outline-secondary w-45" (click)="report()">
+              <i class="bi bi-flag"></i> Report
+            </button>
+          </div>
         </div>
       </div>
     </div>
