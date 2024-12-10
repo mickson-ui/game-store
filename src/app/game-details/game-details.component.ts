@@ -60,13 +60,15 @@ export class GameDetailsComponent implements OnInit {
   }
 
   addToCart() {
+    if(!this.game) return;
     console.log('Added to cart:', this.game.title);
-    // Logic for adding to cart
+    this.gameService.addToCart(this.game);
   }
 
   addToWishlist() {
+    if(!this.game) return
     console.log('Added to wishlist:', this.game.title);
-    // Logic for adding to wishlist
+    this.gameService.addToWishlist(this.game)
   }
 
   share(){

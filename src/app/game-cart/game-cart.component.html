@@ -1,1 +1,58 @@
-<p>game-cart works!</p>
+<div class="container">
+  <h4>My Cart</h4>
+  <div class="cart-container">
+    <!-- Cart Items Section -->
+    <div class="cart-items">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img [src]="item.image" alt="{{ item.title }}" class="item-image" />
+
+        <div class="item-details">
+          <h3>{{ item.title }}</h3>
+          <span *ngIf="item.baseGame" class="base-game">{{
+            item.baseGame
+          }}</span>
+
+          <div *ngIf="item.reward" class="reward">
+            <span class="reward-icon">⭐</span>
+            <span class="reward-text">{{ item.reward }}</span>
+          </div>
+
+          <p class="refund-policy">{{ item.refundPolicy }}</p>
+        </div>
+
+        <div class="item-price">
+          {{ item.price }}
+        </div>
+
+        <div class="item-actions">
+          <button class="remove-button" (click)="removeFromCart(item.id)">
+            Remove
+          </button>
+        </div>
+
+        <div *ngIf="item.incompatible" class="incompatible-warning">
+          ⚠️ This product is not compatible with your current device
+        </div>
+      </div>
+      <div *ngIf="!cartItems || cartItems.length === 0">Cart is Empty</div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="summary">
+      <h2>Games Summary</h2>
+      <div class="summary-item">
+        <span>Price</span>
+        <span>{{ totalPrice | currency }}</span>
+      </div>
+      <div class="summary-item">
+        <span>Taxes</span>
+        <span>Calculated at Checkout</span>
+      </div>
+      <div class="summary-item total">
+        <span>Subtotal</span>
+        <span>{{ totalPrice | currency }}</span>
+      </div>
+      <button class="checkout-button">Check Out</button>
+    </div>
+  </div>
+</div>

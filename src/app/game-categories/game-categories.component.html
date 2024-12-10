@@ -1,0 +1,10 @@
+<div class="container">
+  <h2 class="mt-4">Games in "{{ categoryName }}" Category</h2>
+  <div class="grid-container">
+    <app-game-card *ngFor="let game of games" [game]="game" class="grid-item"></app-game-card>
+  </div>
+
+  <ng-template #noGamesFound>
+    <p>No games found for the category: {{ categoryName }}</p>
+  </ng-template>
+</div>

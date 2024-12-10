@@ -1,11 +1,63 @@
 @import "../../styles.scss";
 
-button{
-  background-color: $tertiary-color;
-  color: $primary-font-color;
+// Container for the whole carousel
+.carousel-container {
+  color: #fff; // Example text color
+  max-width: 1200px; // Adjust to fit your design
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+// Header section that holds the title and a "view all" link
+.carousel-header {
+  margin-bottom: 1rem;
+  h2 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  .view-all-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Wrapper holds the track and navigation buttons
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+// The track that slides horizontally
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 2rem;
+}
+
+// Each card item
+.carousel-item {
+  flex: 0 0 auto; // Prevent wrapping
+  width: 200px;   // or adjust to your card design
+  margin-right: 16px; // gap between items
+
+  // Optionally style your cards or rely on <app-game-card> for that
+}
+
+// Navigation buttons
+.nav-button {
+  background-color: rgba(0,0,0,0.5);
   border: none;
-  border-radius: 20em;
+  color: #fff;
   cursor: pointer;
-  font-size: 1.2rem;
-  padding: 0.2rem 0.8rem;
+  font-size: 1rem;
+}
+
+.nav-button:hover {
+  background-color: rgba(0,0,0,0.7);
 }

@@ -12,4 +12,7 @@ export interface Game {
   originalPrice?: string;
   playAvailable?: boolean;
   videoUrl?: string;
+  reward?: string;
+  refundPolicy?: string;
+  incompatible?: boolean;
 }

@@ -1,1 +1,45 @@
-<p>game-wishlist works!</p>
+<div class="container">
+  <h4>Wishlist</h4>
+  <div class="sort-dropdown">
+    <label for="sort">Sort by:</label>
+    <select id="sort" [(ngModel)]="selectedSort" (change)="sortGames()">
+      <option *ngFor="let option of sortOptions" [value]="option">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+  <br />
+
+  <div class="game-list">
+    <div *ngFor="let game of games" class="game-card">
+      <img [src]="game.image" alt="{{ game.title }}" class="game-image" />
+
+      <div class="game-details">
+        <h3>{{ game.title }}</h3>
+        <span *ngIf="game.baseGame" class="base-game">{{ game.baseGame }}</span>
+        <p *ngIf="game.rating">Rating: {{ game.rating }}</p>
+
+        <div *ngIf="game.discount" class="discount-info">
+          <span class="discount">{{ game.discount }}</span>
+          <span class="original-price">{{ game.originalPrice }}</span>
+          <span class="sale-price">{{ game.price }}</span>
+        </div>
+
+        <div *ngIf="!game.discount" class="price">{{ game.price }}</div>
+        <p class="description">{{ game.description }}</p>
+
+        <button class="action-button mb-4" (click)="addToCart()">
+          {{ game.playAvailable ? "View In Cart" : "Add To Cart" }}
+        </button>
+
+        <button
+          class="btn btn-outline-danger"
+          (click)="removeFromWishlist(game.id)"
+        >
+          Remove from Wishlist
+        </button>
+      </div>
+      <div *ngIf="!games || games.length === 0">Your Wishlist is empty.</div>
+    </div>
+  </div>
+</div>

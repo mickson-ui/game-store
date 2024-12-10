@@ -1,4 +1,32 @@
 <div class="carousel">
+  <div
+    class="d-flex justify-content-between align-items-center carousel-header"
+  >
+    <a class="view-all-link">
+      <h2 (click)="onCategoryTitleClick()" class="category-title">
+        {{ categoryTitle }}
+      </h2>
+      <!-- The rest of your carousel code... -->
+    </a>
+
+    <div class="d-flex gap-2">
+      <button class="nav-button prev" (click)="prevSlide()">
+        <span>&lt;</span>
+      </button>
+
+      <button class="nav-button next" (click)="nextSlide()">
+        <span>&gt;</span>
+      </button>
+    </div>
+  </div>
+  <div class="carousel-wrapper">
+    <div class="carousel-track" [style.transform]="getTransform()">
+      <app-game-card *ngFor="let game of games" [game]="game"></app-game-card>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="carousel">
   <div class="d-flex justify-content-between">
     <h5>{{ categoryTitle }} <span>&#x2192;</span></h5>
     <div class="d-flex gap-2 align-items-center carousel-controls">
@@ -25,4 +53,4 @@
     </div>
     <app-game-card *ngFor="let game of games" [game]="game"></app-game-card>
   </div>
-</div>
+</div> -->

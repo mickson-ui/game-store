@@ -70,11 +70,19 @@
   </div>
 
   <div>
-    <app-game-carousel categoryTitle="Top Games" [games]="topGames">
+    <app-game-carousel
+      categoryTitle="All Games"
+      [games]="topGames"
+      (categoryClicked)="navigateToCategory($event)"
+    >
     </app-game-carousel>
   </div>
   <div>
-    <app-game-carousel categoryTitle="Trending Now" [games]="trendingGames">
+    <app-game-carousel
+      categoryTitle="Sports"
+      [games]="trendingGames"
+      (categoryClicked)="navigateToCategory($event)"
+    >
     </app-game-carousel>
   </div>
 </div>
