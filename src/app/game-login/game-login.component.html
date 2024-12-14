@@ -49,6 +49,8 @@
           Password is required
         </div>
       </div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
       <button
         type="submit"
         [disabled]="loginForm.invalid"
@@ -59,12 +61,13 @@
       </button>
       <p class="footer-text">
         Don't have an account?
-        <a
+        <button
           href="#"
           routerLink="/signup"
           routerLinkActive="router-links__router-link--active"
-          >Sign Up</a
         >
+          Sign Up
+        </button>
       </p>
     </form>
   </div>

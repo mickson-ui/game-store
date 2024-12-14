@@ -13,13 +13,23 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  topGames: Game[] = [];
+  allGames: Game[] = [];
   trendingGames: Game[] = [];
+
+  isLoading: boolean = false;
 
   constructor(private gameService: GameService, private router: Router) {}
   ngOnInit(): void {
-    this.topGames = this.gameService.getTopGames();
-    this.trendingGames = this.gameService.getTrendingGames();
+    this.gameService.getAllGames().subscribe({
+      next: (data) => {
+        this.allGames = data;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching all games:', error);
+        this.isLoading = false;
+      }
+    })
   }
 
   navigateToCategory(category: string) {

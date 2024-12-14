@@ -28,12 +28,13 @@ export class GameCategoriesComponent implements OnInit {
   }
 
   filterGamesByCategory(): void {
-    const allGames = this.gameService.getAllGames();
-    if (this.categoryName) {
-      this.games = allGames.filter(game => game.tags && game.tags.includes(this.categoryName));
-    } else {
-      this.games = [];
-    }
+    this.gameService.getAllGames().subscribe(allGames => {
+      if (this.categoryName) {
+        this.games = allGames.filter((game: Game) => game.tags && game.tags.includes(this.categoryName));
+      } else {
+        this.games = [];
+      }
+    });
   }
 
   // ngOnChanges(): void {

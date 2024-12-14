@@ -31,7 +31,12 @@
       <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
         <!-- Video or Image Placeholder -->
         <ng-container *ngIf="game.videoUrl; else imagePlaceholder">
-          <video controls [src]="game.videoUrl" class="video-player w-100" autoplay>
+          <video
+            controls
+            [src]="game.videoUrl"
+            class="video-player w-100"
+            autoplay
+          >
             Your browser does not support the video tag.
           </video>
         </ng-container>
@@ -139,12 +144,38 @@
           </div>
 
           <!-- Action Buttons -->
-          <button class="buy-button w-100" (click)="buyNow()">Buy Now</button>
-          <button class="cart-button w-100" (click)="addToCart()">
-            Add To Cart
+          <div>
+            <button
+              class="buy-button w-100"
+              *ngIf="!game.playAvailable; else playNowTemplate"
+              (click)="buyNow()"
+            >
+              Buy Now
+            </button>
+
+            <ng-template #playNowTemplate>
+              <button class="play-button w-100" (click)="playNow()">
+                Play Now
+              </button>
+            </ng-template>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button
+            class="cart-button w-100"
+            [disabled]="game.inCart"
+            (click)="addToCart()"
+          >
+            {{ game.inCart ? "Already in Cart" : "Add to Cart" }}
           </button>
-          <button class="wishlist-button w-100" (click)="addToWishlist()">
-            Add to Wishlist
+
+          <!-- Add to Wishlist Button -->
+          <button
+            class="wishlist-button w-100"
+            [disabled]="game.inWishlist"
+            (click)="addToWishlist()"
+          >
+            {{ game.inWishlist ? "Already in Wishlist" : "Add to Wishlist" }}
           </button>
 
           <!-- Additional Details Section -->
@@ -186,6 +217,66 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Success Popup -->
+  <div
+    class="popup-container"
+    *ngIf="showPurchaseSuccess"
+    (click)="closePopup($event, 'purchase')"
+  >
+    <div class="popup">
+      <h3>Purchase Successful!</h3>
+      <p>Thank you for purchasing {{ game.title }}.</p>
+      <button class="btn btn-primary" (click)="closePopup($event, 'purchase')">
+        Play Now
+      </button>
+    </div>
+  </div>
+
+  <!-- Add to Cart Success Popup -->
+  <div
+    class="popup-container"
+    *ngIf="showCartSuccess"
+    (click)="closePopup($event, 'cart')"
+  >
+    <div class="popup">
+      <h3>Added to Cart!</h3>
+      <p>{{ game.title }} has been added to your cart.</p>
+      <button class="btn btn-primary" (click)="closePopup($event, 'cart')">
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Add to Wishlist Success Popup -->
+  <div
+    class="popup-container"
+    *ngIf="showWishlistSuccess"
+    (click)="closePopup($event, 'wishlist')"
+  >
+    <div class="popup">
+      <h3>Added to Wishlist!</h3>
+      <p>{{ game.title }} has been added to your wishlist.</p>
+      <button class="btn btn-primary" (click)="closePopup($event, 'wishlist')">
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Internet connection popup -->
+  <div
+    class="popup-container"
+    *ngIf="showInternentConnection"
+    (click)="closePopup($event, 'play')"
+  >
+    <div class="popup">
+      <h3>Added to Wishlist!</h3>
+      <p>You need an active internet connection to play this game.</p>
+      <button class="btn btn-primary" (click)="closePopup($event, 'play')">
+        Continue
+      </button>
     </div>
   </div>
 </div>

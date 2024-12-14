@@ -1,3 +1,4 @@
+import { AuthService } from './../shared/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -15,7 +16,7 @@ export class HeaderComponent {
 
   showHeader: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private authService: AuthService) {
     // Listen to route changes
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -23,6 +24,11 @@ export class HeaderComponent {
         this.showHeader = !['/login', '/signup'].includes(event.urlAfterRedirects);
       }
     });
+  }
+
+  logout() {
+    this.authService.logout()
+    this.router.navigate(['/login'])
   }
 
   toggleNav() {

@@ -3,36 +3,36 @@
   <div class="cart-container">
     <!-- Cart Items Section -->
     <div class="cart-items">
-      <div *ngFor="let item of cartItems" class="cart-item">
-        <img [src]="item.image" alt="{{ item.title }}" class="item-image" />
+      <div *ngFor="let cartItem of cartItems" class="cart-item">
+        <img [src]="cartItem.gameImage" alt="{{ cartItem.gameTitle }}" class="item-image" />
 
         <div class="item-details">
-          <h3>{{ item.title }}</h3>
-          <span *ngIf="item.baseGame" class="base-game">{{
+          <h3>{{ cartItem.gameTitle }}</h3>
+          <!-- <span *ngIf="item.baseGame" class="base-game">{{
             item.baseGame
-          }}</span>
+          }}</span> -->
 
-          <div *ngIf="item.reward" class="reward">
+          <!-- <div *ngIf="item.reward" class="reward">
             <span class="reward-icon">⭐</span>
             <span class="reward-text">{{ item.reward }}</span>
-          </div>
+          </div> -->
 
-          <p class="refund-policy">{{ item.refundPolicy }}</p>
+          <!-- <p class="refund-policy">{{ item.refundPolicy }}</p> -->
         </div>
 
         <div class="item-price">
-          {{ item.price }}
+          {{ cartItem.gamePrice }}
         </div>
 
         <div class="item-actions">
-          <button class="remove-button" (click)="removeFromCart(item.id)">
+          <button class="remove-button" (click)="removeFromCart(cartItem.id)">
             Remove
           </button>
         </div>
 
-        <div *ngIf="item.incompatible" class="incompatible-warning">
+        <!-- <div *ngIf="item.incompatible" class="incompatible-warning">
           ⚠️ This product is not compatible with your current device
-        </div>
+        </div> -->
       </div>
       <div *ngIf="!cartItems || cartItems.length === 0">Cart is Empty</div>
     </div>

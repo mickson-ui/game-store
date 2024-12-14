@@ -18,9 +18,10 @@ export class GameLibraryComponent implements OnInit {
   ngOnInit(): void {
     this.getMyGames();
   }
-
-  getMyGames(): void{
-    this.myLibrary = this.gameService.getAllGames();
+  getMyGames(): void {
+    this.gameService.getAllGames().subscribe(games => {
+      this.myLibrary = games;
+    });
   }
 
 }
