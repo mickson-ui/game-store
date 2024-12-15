@@ -38,7 +38,7 @@ export interface Cart {
   gameImage?: string;
 }
 
-export interface Library {
+export interface Library extends Game {
   id: string;
   userId: string;
   gameId: string;

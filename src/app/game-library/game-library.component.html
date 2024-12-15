@@ -1,7 +1,7 @@
 <div class="container">
   <h2>My Library</h2>
   <div class="grid-container">
-    <app-game-card *ngFor="let myGame of myLibrary" [game]="myGame" class="grid-item">
+    <app-game-card *ngFor="let game of libraryItems" [game]="game" class="grid-item">
     </app-game-card>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cart, Game, Wishlist } from '../models/game.interface';
+import { Cart, Game, Library, Wishlist } from '../models/game.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 
@@ -32,12 +32,28 @@ export class GameService {
     );
   }
 
-  getRelatedGames(): Game[] {
-    return this.relatedGames;
+  getLibraryItems(): Observable<any[]> {
+    const token = localStorage.getItem('game_store_token');
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+      .set('Cache-Control', 'no-cache')
+      .set('Pragma', 'no-cache');
+
+    return this.http.get<{ isSuccessful: boolean; responseCode: string; responseMessage: string; library: Library[] }>(
+      `${this.API_BASE_URL}/library/all`,
+      { headers }
+    ).pipe(
+      map((response) => response.library)
+    );
   }
 
-  getTopGames(): Game[] {
-    return this.topGames;
+  buyGame(gameId: string): Observable<any> {
+    const token = localStorage.getItem('game_store_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    console.log('API Call: Buying game with ID:', gameId); // Debugging
+
+    return this.http.post(`${this.API_BASE_URL}/library`,{gameId: gameId}, { headers });
   }
 
   getCartItems(): Observable<Cart[]> {
@@ -120,6 +136,13 @@ export class GameService {
     return this.trendingGames;
   }
 
+  getRelatedGames(): Game[] {
+    return this.relatedGames;
+  }
+
+  getTopGames(): Game[] {
+    return this.topGames;
+  }
 
 
 

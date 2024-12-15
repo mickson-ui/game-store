@@ -22,9 +22,9 @@ export class GameDetailsComponent implements OnInit {
   showWishlistSuccess: boolean = false;
   showInternentConnection: boolean = false;
 
-  constructor(private gameService: GameService, private route: ActivatedRoute){}
+  constructor(private gameService: GameService, private route: ActivatedRoute) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.loadGameDetails();
     this.relatedGames = this.gameService.getRelatedGames();
   }
@@ -32,15 +32,28 @@ export class GameDetailsComponent implements OnInit {
   private loadGameDetails(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.gameService.getGameDetails(id).subscribe(gameDetails => {
-        if (gameDetails) {
-          this.game = {
-            ...gameDetails,
-            gameLink: 'https://example.com/playgame'
-          };
-        } else {
-          console.error('Game not found with id:', id);
-        }
+      this.gameService.getGameDetails(id).subscribe({
+        next: (gameDetails) => {
+          if (gameDetails) {
+            this.game = {
+              ...gameDetails,
+              gameLink: gameDetails.gameLink || this.constructGameLink(gameDetails.id),
+            };
+
+            // Check if the game is in the purchased list
+            const purchasedGames = JSON.parse(localStorage.getItem('purchasedGames') || '[]');
+            if (purchasedGames.includes(this.game.id)) {
+              this.game.playAvailable = true;
+            }
+
+            console.log('Loaded game details:', this.game);
+          } else {
+            console.error('Game not found with id:', id);
+          }
+        },
+        error: (err) => {
+          console.error('Error loading game details:', err);
+        },
       });
     } else {
       console.error('No id found in route');
@@ -48,30 +61,27 @@ export class GameDetailsComponent implements OnInit {
   }
 
 
-  buyNow(): void {
-    if (!this.game) return;
-    console.log('Buying:', this.game.title);
-    // Logic for buying the game
-    this.game.playAvailable = true; // Set playAvailable to true after purchase
-    this.showPurchaseSuccess = true;
+  private constructGameLink(id: string): string {
+    // Dynamically construct a game link using the game ID
+    return `https://store.mygames.com/game/${id}`;
   }
 
   playNow(): void {
     if (!this.game) return;
     console.log('Loading:', this.game.title);
 
-    // Check for internet connection
-  if (navigator.onLine) {
-    console.log('Playing:', this.game.title);
-    // Open the game link in a new tab
-    window.open(this.game.gameLink, '_blank');
-  } else {
-    // Display an error message
-    console.error('No internet connection. Cannot play the game.');
-    // alert('You need an active internet connection to play this game.');
-    this.showInternentConnection = true
-  }
-
+    if (navigator.onLine) {
+      if (this.game.gameLink) {
+        console.log('Playing:', this.game.title);
+        window.open(this.game.gameLink, '_blank'); // Open the game in a new tab
+      } else {
+        console.error('No game link available for:', this.game.title);
+        alert('Game link is not available for this game.');
+      }
+    } else {
+      console.error('No internet connection. Cannot play the game.');
+      this.showInternentConnection = true;
+    }
   }
 
   closePopup(event: Event, type: string): void {
@@ -104,6 +114,31 @@ export class GameDetailsComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error adding to cart:', err);
+      },
+    });
+  }
+
+
+  buyNow(): void {
+    if (!this.game || this.game.playAvailable) {
+      console.log('Game already in library or invalid:', this.game?.title);
+      return;
+    }
+    console.log('Buying:', this.game.title);
+    this.gameService.buyGame(this.game.id).subscribe({
+      next: () => {
+        this.game.playAvailable = true;
+        this.showPurchaseSuccess = true;
+        console.log('Game successfully added to library:', this.game.title);
+
+        // Persist purchased state in localStorage
+        const purchasedGames = JSON.parse(localStorage.getItem('purchasedGames') || '[]');
+        purchasedGames.push(this.game.id);
+        localStorage.setItem('purchasedGames', JSON.stringify(purchasedGames));
+        console.log('Purchased games:', purchasedGames);
+      },
+      error: (err) => {
+        console.error('Error buying game:', err);
       },
     });
   }

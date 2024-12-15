@@ -1,7 +1,6 @@
 <div class="game-card" [routerLink]="['/game', game.id]">
   <div class="game-image">
     <img [src]="game.image" [alt]="game.title" />
-    <button *ngIf="game.playAvailable" class="play-button">Play</button>
   </div>
   <div class="game-info">
     <p class="base-game">{{ game.baseGame }}</p>
@@ -12,5 +11,14 @@
       <span class="final-price">{{ game.price }}</span>
     </p>
     <p *ngIf="!game.discount" class="price">{{ game.price }}</p>
+  </div>
+</div>
+<button *ngIf="game.playAvailable" class="play-button" (click)="playNow()">Play</button>
+
+<!-- Internet Connection Popup -->
+<div *ngIf="showInternentConnection" class="popup-container">
+  <div class="popup">
+    <p>No internet connection. Please check your connection and try again.</p>
+    <button class="close-button" (click)="closeInternetPopup()">Close</button>
   </div>
 </div>
